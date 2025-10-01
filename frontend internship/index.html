@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamified Task Manager</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">
+   
+    <h1>Task Manager</h1>
+  </div>
+  <div class="nav-group">
+    <button id="nav-dashboard" onclick="showPage('dashboard')" class="active">📊 Dashboard</button>
+    <button id="nav-tasks" onclick="showPage('tasks')">📝 Tasks</button>
+    <button id="nav-achievements" onclick="showPage('achievements')">🏆 Achievements</button>
+  </div>
+  <div class="game-stats" id="gameStats">⭐ Lv 1 • XP 0/100</div>
+</div>
+
+<main>
+  <!-- Dashboard -->
+  <section id="dashboard" class="page active">
+    <h2>Dashboard</h2>
+    <div id="stats" class="small">📋 Total: 0 | ✅ Completed: 0 | ⏳ Pending: 0</div>
+    <div class="progress-wrap">
+      <div class="progress" aria-hidden="true">
+        <div id="taskProgress" class="bar">0%</div>
+      </div>
+    </div>
+    <div class="hint">Complete tasks to gain XP and level up. Higher-priority tasks give more XP.</div>
+    <canvas id="weeklyChart" height="120"></canvas>
+    <div class="badges" id="badgesDisplay"></div>
+    <div class="small">Current Streak: <span id="streakDisplay">0</span> days</div>
+  </section>
+
+  <!-- Tasks -->
+  <section id="tasks" class="page">
+    <h2>Task Manager</h2>
+    <div class="controls">
+      <input id="taskInput" type="text" placeholder="Enter new task">
+      <input id="dateInput" type="date">
+      <select id="priorityInput">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+      </select>
+      <select id="categoryInput">
+        <option value="Personal">Personal</option>
+        <option value="Work">Work</option>
+        <option value="Fitness">Fitness</option>
+      </select>
+      <button class="primary" onclick="addTask()">➕ Add</button>
+      <button onclick="clearAll()">🗑 Clear All</button>
+    </div>
+
+    <div class="row">
+      <label class="small">Sort:</label>
+      <select id="sortBy" onchange="renderTasks()">
+        <option value="default">Default</option>
+        <option value="priority">Priority</option>
+        <option value="date">Due Date</option>
+        <option value="done">Completion</option>
+      </select>
+      <label class="small">Filter Category:</label>
+      <select id="filterCategory" onchange="renderTasks()">
+        <option value="all">All</option>
+        <option value="Personal">Personal</option>
+        <option value="Work">Work</option>
+        <option value="Fitness">Fitness</option>
+      </select>
+      <input id="searchInput" type="text" placeholder="🔍 Search tasks..." oninput="renderTasks()">
+    </div>
+
+    <ul class="tasks" id="taskList"></ul>
+  </section>
+
+  <!-- Achievements -->
+  <section id="achievements" class="page">
+    <h2>Achievements</h2>
+    <div class="ach-board">
+      <div id="badgesArea" class="badges"></div>
+      <div style="margin-top:14px;">
+        <div class="small">Level: <span id="lvlDisplay">1</span></div>
+        <div class="small">XP: <span id="xpDisplay">0</span>/100</div>
+        <div class="small">Streak: <span id="streakDisplayAch">0</span> days</div>
+      </div>
+      <div style="margin-top:12px;">
+        <button onclick="resetProgress()">Reset Progress</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Toast Notification -->
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

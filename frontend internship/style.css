@@ -1,0 +1,80 @@
+:root{
+  --bg1:#74ebd5;
+  --bg2:#9face6;
+  --accent:#ff6b6b;
+  --card:#ffffff;
+  --muted:#666;
+  --dark-bg:#1c1c1c;
+  --dark-card:#2c2c2c;
+  --dark-text:#eee;
+}
+
+*{box-sizing:border-box;}
+body{
+  font-family:"Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:#222;
+  -webkit-font-smoothing:antialiased;
+  transition: all 0.3s;
+}
+body.dark{
+  background: #121212;
+  color: var(--dark-text);
+}
+
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:rgba(0,0,0,0.06);
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand h1{font-size:18px;margin:0;}
+.nav-group{display:flex;gap:8px;align-items:center;}
+.nav-group button{
+  background:transparent;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;color:#111;font-weight:600;
+}
+.nav-group button.active, .nav-group button:hover{
+  background: linear-gradient(135deg,var(--accent),#ff3b3b);color:#fff;transform:translateY(-2px);
+}
+.game-stats{display:flex;gap:10px;align-items:center;font-weight:700;}
+.small{font-size:13px;color:var(--muted);font-weight:600;}
+main{padding:18px;max-width:980px;margin:0 auto;}
+.page{display:none;}
+.page.active{display:block;}
+.controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;}
+input[type="text"],input[type="date"],select{padding:10px 12px;border-radius:12px;border:1px solid rgba(0,0,0,0.12);outline:none;min-width:160px;}
+.primary{background:linear-gradient(135deg,var(--accent),#ff3b3b);color:white;border:none;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700;}
+.row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:10px;}
+ul.tasks{list-style:none;padding:0;margin:0 auto;max-width:800px;}
+li.task{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--card);margin:10px 0;box-shadow:0 6px 14px rgba(0,0,0,0.06);}
+body.dark li.task{background: var(--dark-card);}
+.task-left{display:flex;gap:10px;align-items:center;flex:1;}
+.task .meta{color:var(--muted);font-size:13px;margin-left:8px;}
+.task.done .label{text-decoration:line-through;color:#999;}
+.task .priority{padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px;}
+.prio-high{background: rgba(255,0,0,0.08); color:#c62828;}
+.prio-medium{background: rgba(255,165,0,0.08); color:#e65100;}
+.prio-low{background: rgba(0,200,0,0.06); color:#2e7d32;}
+.task-actions button{border:none;background:transparent;padding:6px;cursor:pointer;font-size:16px;}
+.task-actions button.del{color:#b00020;}
+.progress-wrap{max-width:720px;margin:12px auto 22px;}
+.progress{height:26px;background: rgba(0,0,0,0.06);border-radius:14px;overflow:hidden;box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);}
+.progress .bar{height:100%;width:0%;background: linear-gradient(90deg, #ff4d4d, #ff9900, #33cc33);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px;}
+.badge{background:linear-gradient(135deg,#ffd54f,#ffc107);padding:8px 12px;border-radius:12px;font-weight:800;box-shadow:0 6px 12px rgba(0,0,0,0.08);}
+.ach-board{text-align:center;padding:10px;}
+.muted{color:var(--muted);}
+.hint{font-size:13px;color:var(--muted);margin-top:6px;}
+li.task.overdue{border-left:4px solid red;}
+li.task.today{border-left:4px solid green;}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:10px 18px;border-radius:8px;opacity:0;transition:opacity 0.3s;}
+@media(max-width:720px){.nav-group{gap:6px}.brand h1{font-size:16px}.controls{flex-direction:column;align-items:center;}}
+.task-group-header {
+  font-weight: 700;
+  font-size: 14px;
+  margin: 12px 0 6px;
+  padding-left: 10px;
+  color: #ff3b3b;
+}
+body.dark .task-group-header { color: #ff6b6b; }
